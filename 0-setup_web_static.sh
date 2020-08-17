@@ -1,36 +1,22 @@
 #!/usr/bin/env bash
-# sets up your web servers for the deployment of web_static.
+#sets up a web server for deployment of web_static
+apt -y update
+apt install -y nginx
+mkdir -pv /data/web_static/releases/test/
+echo "Holberton School" > /data/web_static/releases/test/index.html
+ln -sf /data/web_static/releases/test/ /data/web_static/current
+chown -hR ubuntu:ubuntu /data/
+echo "server {
+  listen 80;
+  listen [::]:80 default_server;
+  location /hbnb_static {
+    alias /data/web_static/current/;
+  }
+  index index.html;
 
-sudo apt-get -y install nginx
-sudo mkdir -p /data/
-sudo mkdir -p /data/web_static/
-sudo mkdir -p /data/web_static/releases/
-sudo mkdir -p /data/web_static/shared/
-sudo mkdir -p /data/web_static/releases/test/
-sudo touch /data/web_static/releases/test/index.html
-sudo echo "
-<html>
-  <head>
-  </head>
-  <body>
-    Holberton School
-  </body>
-</html>" > /data/web_static/releases/test/index.html
-sudo ln -sf  /data/web_static/releases/test/ /data/web_static/current
-sudo chown -R ubuntu:ubuntu /data/
-sudo printf %s"
-server {
-    listen 80;
-    listen [::]:80 default_server;
-    server_name https://khawla.tech/
-    root   /var/www//html;
-    index index.nginx-debian.html index.nginx-debian.html;
-    add_header X-Served-By 1391-web-01-1596560744;
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-    }
-    location /current/ {
-        alias  /data/web_static/current/hbnb_static;
-    }
+  server_name koeusiss.tech;
+  rewrite '^/redirect_me$' http://example.com permanent;
+  error_page 404 /custom_404.html;
+  add_header X-Served-By $HOSTNAME;
 }" > /etc/nginx/sites-available/default
-sudo service nginx restart
+service nginx restart

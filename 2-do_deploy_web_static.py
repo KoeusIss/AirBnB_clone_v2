@@ -9,6 +9,7 @@ import os
 env.hosts = ['34.75.25.162', '34.75.199.74']
 env.usre = 'ubuntu'
 
+
 def do_pack():
     """Archive the content of web_static folder"""
     time = datetime.utcnow().strftime('%Y%m%d%H%M%S')
@@ -20,6 +21,7 @@ def do_pack():
         return file_path
     else:
         return None
+
 
 def do_deploy(archive_path):
     """Distribute an Archive to servers"""
@@ -34,7 +36,8 @@ def do_deploy(archive_path):
         run('mkdir /data/web_static/releases/{}'.format(file_name))
         run('tar -xzf /tmp/{}.tgz -C /data/web_static/releases/{}'.
             format(file_name, file_name))
-        run('mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}/'.
+        run('mv /data/web_static/releases/{}/web_static/* \
+            /data/web_static/releases/{}/'.
             format(file_name, file_name))
         run('rm -rf /data/web_static/releases/{}/web_static'.format(file_name))
         run('rm -rf /tmp/{}.tgz'.format(file_name))

@@ -6,7 +6,8 @@ mkdir -pv /data/web_static/releases/test/
 echo "Holberton School" > /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 chown -hR ubuntu:ubuntu /data/
-echo "server {
+echo "
+server {
   listen 80;
   listen [::]:80 default_server;
   location /hbnb_static {

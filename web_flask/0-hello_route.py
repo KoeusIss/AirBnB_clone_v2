@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""WebFlask module"""
 from flask import Flask
 from os import environ
 app = Flask(__name__)
@@ -6,7 +7,9 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def hello_route():
+    """Display Hello HBNB"""
     return 'Hello HBNB!'
+
 
 if __name__ == '__main__':
     environ['FLASK_APP'] = __file__

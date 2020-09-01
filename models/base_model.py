@@ -36,17 +36,12 @@ class BaseModel:
         # TODO move models.storage.new to save(self)
         # // storage.new(self)
         if kwargs:
-            # TODO create instance attribute from kwargs
-            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-            kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-
-            del kwargs['__class__']
             for key, value in kwargs.items():
-                setattr(self, key, value)
-            # ! change it with the above statement
-            # // self.__dict__.update(kwargs)
+                if key in ("created_at", "updated_at"):
+                    value = datetime.strptime(kwargs['updated_at'],
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
+                if key != "__class__":
+                    setattr(self, key, value)
 
     def __str__(self):
         """Returns a string representation of the instance"""

@@ -1,2 +1,4 @@
-0-transfer_file
 .gitignore
+0-transfer_file
+__pycache__
+main.py

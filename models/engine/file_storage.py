@@ -58,7 +58,8 @@ class FileStorage:
     def delete(self, obj=None):
         """Deletes record from the object dictinary"""
         if obj:
-            del FileStorage.__objects["{}.{}".format(type(obj).__name__, obj.id)]
+            del FileStorage.__objects["{}.{}".
+                                      format(type(obj).__name__, obj.id)]
 
     def close(self):
         """calls the reload method for deserializing object"""

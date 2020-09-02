@@ -12,13 +12,6 @@ def teardown_session(session):
     storage.close()
 
 
-@app.route('/states_list', strict_slashes=False)
-def listing_states():
-    """Listings states"""
-    from models.state import State
-    states = storage.all(State).values()
-    return render_template("7-states_list.html", states=states)
-
 @app.route('/cities_by_states', strict_slashes=False)
 def cities_by_states_list():
     """Listings cities by state"""

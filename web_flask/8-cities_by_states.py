@@ -13,7 +13,7 @@ def teardown_session(session):
 
 
 @app.route('/cities_by_states', strict_slashes=False)
-def cities_by_states_list():
+def cities_list():
     """Listings cities by state"""
     from models.state import State
     states = storage.all(State).values()

@@ -19,9 +19,8 @@ def listing_states():
     states = storage.all(State).values()
     return render_template("7-states_list.html", states=states)
 
-
 @app.route('/cities_by_states', strict_slashes=False)
-def cities_by_states():
+def cities_by_states_list():
     """Listings cities by state"""
     from models.state import State
     states = storage.all(State).values()

@@ -20,6 +20,13 @@ def listing_states():
     return render_template("7-states_list.html", states=states)
 
 
+@app.route('/cities_by_states', strict_slashes=False)
+def cities_by_states():
+    """Listings cities by state"""
+    from models.state import State
+    states = storage.all(State).values()
+    return render_template("8-cities_by_states.html", states=states)
+
 if __name__ == '__main__':
     environ['FLASK_APP'] = __file__
     app.run(host='0.0.0.0', port=5000)

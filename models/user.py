@@ -3,6 +3,8 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+from models.place import Place
+from models.review import Review
 
 
 class User(BaseModel, Base):
@@ -27,11 +29,11 @@ class User(BaseModel, Base):
     # TODO add a backrefenrece to places
     places = relationship(
         "Place",
-        backref="User",
+        backref="user",
         cascade="all, delete"
     )
     reviews = relationship(
         "Review",
-        backref="User",
+        backref="user",
         cascade="all, delete"
     )
